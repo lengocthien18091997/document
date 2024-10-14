@@ -2,27 +2,35 @@
 
 int main()
 {
-    int a[] = {1, 4, 8, 12, 5, 1, 3}; // Khởi tạo mảng hợp lệ
-    int n = sizeof(a) / sizeof(a[0]); // Xác định kích thước mảng
-    int maxSum = a[0];
-    int count = 0;
 
+    int n;
+    scanf("%d", &n);
+    int arr[n];
     for (int i = 0; i < n; i++)
     {
-        for (int j = i; j < n; j++)
+        scanf("%d", &arr[i]);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        int maxIndex = i;
+        for (int j = i + 1; j < n; ++j)
         {
-            int sum = 0;
-            for (int k = i; k <= j; k++)
+            if (arr[j] < arr[maxIndex])
             {
-                sum += a[k];
-                count++;
+                maxIndex = j;
             }
-            if (sum > maxSum)
-                maxSum = sum;
+        }
+        if (i != maxIndex)
+        {
+            int temp = arr[i];
+            arr[i] = arr[maxIndex];
+            arr[maxIndex] = temp;
         }
     }
 
-    printf("Max Sum: %d\n", maxSum); // Đảm bảo dùng đúng định dạng cho printf
-    printf("Count: %d\n", count);
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
     return 0;
 }
